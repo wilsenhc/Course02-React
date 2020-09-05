@@ -3,10 +3,6 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class DishDetail extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     renderDish(dish) {
         if (dish != null)
             return(
@@ -27,9 +23,9 @@ class DishDetail extends Component {
     renderComments(comments) {
         let options = { year: 'numeric', month: 'short', day: 'numeric' };
 
-        if (comments != null) {
+        if (comments.length > 0) {
             const commentList = comments.map((comment) => {
-                return (<li>
+                return (<li key={comment.id}>
                     <p>{ comment.comment }</p>
                     <p>-- { comment.author}, { (new Date(comment.date)).toLocaleDateString('en-US', options) }</p>
                 </li>);
@@ -44,10 +40,11 @@ class DishDetail extends Component {
                 </div>
             );
         }
-        else
+        else {
             return(
                 <div></div>
             );
+        }
     }
 
     render() {
